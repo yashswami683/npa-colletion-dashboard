@@ -202,8 +202,8 @@ export default function OverviewPage({ onOpenAgent }) {
         </div>
       </div>
 
-      {/* 4. Top 8 KPI Cards: 2 rows of 4 cards (Live & Daily Recovery, Scope & Performance) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+      {/* Top 5 KPI Cards: Focus on Live & Historical Collections */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5">
         <KpiCard
           index={0}
           label="Today Live Collection"
@@ -235,33 +235,6 @@ export default function OverviewPage({ onOpenAgent }) {
         />
         <KpiCard
           index={3}
-          label="Total Repayment Due"
-          raw={agg.due}
-          format={fmtINR}
-          sub={`Remaining: ${fmtINR(remaining)}`}
-          icon={AlertCircle}
-          tone="warn"
-        />
-        <KpiCard
-          index={4}
-          label="Total Disbursed Principal"
-          raw={agg.principal}
-          format={fmtINR}
-          sub="Original disbursed loan capital"
-          icon={Layers}
-          tone="neutral"
-        />
-        <KpiCard
-          index={5}
-          label="Active NPA Cases"
-          raw={agg.cases}
-          format={(v) => Math.round(v).toLocaleString('en-IN')}
-          sub={`${agg.agentCount} Agents · ${agg.leaderCount} Leaders`}
-          icon={Users}
-          tone="neutral"
-        />
-        <KpiCard
-          index={6}
           label="Settled vs Part-Payment"
           raw={agg.modeCount?.['PART-PAYMENT'] || 0}
           format={() => `${(agg.modeCount?.['PART-PAYMENT'] || 0).toLocaleString('en-IN')} Part · ${(agg.modeCount?.['SETTLED'] || 0).toLocaleString('en-IN')} Settled`}
@@ -271,7 +244,7 @@ export default function OverviewPage({ onOpenAgent }) {
           valueClassName="text-[17px] sm:text-[18px] xl:text-[19px]"
         />
         <KpiCard
-          index={7}
+          index={4}
           label="Latest Month Recovery (Sep 2026)"
           raw={agg.sep2026Recvd}
           format={fmtINR}
