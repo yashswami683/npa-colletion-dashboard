@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import {
   X, Calendar, ChevronDown, ChevronUp, TrendingUp, CalendarDays, BarChart2,
-  Maximize2, Minimize2, Check, Filter
+  Maximize2, Minimize2, Check, Filter, Target
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -91,6 +91,29 @@ export default function AgentDrawer({ name, onClose }) {
   }, [name]);
   const ydayCashAmt = actualYdayCash?.amount ?? 0;
   const ydayCashCases = actualYdayCash?.cases ?? 0;
+  // 3. Monthly Target Tracking (₹2.50 Lakhs Target per Agent per Month)
+  const TARGET_MONTHLY = 250000; // Fixed 2.5 Lakhs target
+
+  const targetMonthStr = useMemo(() => {
+    if (filterMode === 'month') return latestMonthStr;
+    if (selectedTrajMonth && selectedTrajMonth !== 'all') return selectedTrajMonth;
+    if (lastMonth?.month) return lastMonth.month;
+    if (META.today) return META.today.slice(0, 7);
+    return new Date().toISOString().slice(0, 7);
+  }, [filterMode, latestMonthStr, selectedTrajMonth, lastMonth]);
+
+  // Amount collected in target month strictly calculated by Received Date (r[13])
+  const targetMonthRecvd = useMemo(() => {
+    if (filterMode === 'month') return agg.recvd;
+    const m = agg.monthly.find((x) => x.month === targetMonthStr);
+    if (m) return m.recvd;
+    return lastMonth ? lastMonth.recvd : 0;
+  }, [filterMode, agg.recvd, agg.monthly, targetMonthStr, lastMonth]);
+
+  const targetPct = round1((targetMonthRecvd / TARGET_MONTHLY) * 100);
+  const targetRemaining = Math.max(0, TARGET_MONTHLY - targetMonthRecvd);
+  const isTargetAchieved = targetMonthRecvd >= TARGET_MONTHLY;
+
 
   // Dynamic Inspection Context:
   // When a user filters a single date (e.g. 01/09/2026), these blocks adapt dynamically to that date!
@@ -552,6 +575,106 @@ export default function AgentDrawer({ name, onClose }) {
             )}
           </div>
         )}
+      </div>
+
+      {/* Monthly Collection Target Banner (₹2.5 Lakhs Goal by Received Date) */}
+      <div className="relative bg-gradient-to-br from-slate-900 via-slate-850 to-slate-900 text-white rounded-2xl p-4 sm:p-5 mb-5 shadow-sm border border-slate-750 overflow-hidden">
+        {/* Subtle ambient lighting */}
+        <div className="absolute -right-10 -top-10 w-44 h-44 bg-[#ff5e3a]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-10 -bottom-10 w-44 h-44 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10">
+          {/* Header row */}
+          <div className="flex items-center justify-between gap-3 flex-wrap mb-3.5">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-[#ff5e3a] shadow-xs">
+                <Target size={16} strokeWidth={2.4} />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[13.5px] font-bold tracking-tight font-display text-white">
+                    Monthly Collection Target
+                  </span>
+                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-white/10 text-slate-200 border border-white/15">
+                    {fmtMonth(targetMonthStr)}
+                  </span>
+                </div>
+                <span className="text-[11px] text-slate-400">
+                  Fixed ₹2.50L monthly benchmark · Calculated strictly by Received Date
+                </span>
+              </div>
+            </div>
+
+            {/* Target Status Pill */}
+            <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-bold border shadow-xs ${
+              isTargetAchieved
+                ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40'
+                : 'bg-orange-500/20 text-orange-300 border-orange-400/40'
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${isTargetAchieved ? 'bg-emerald-400' : 'bg-orange-400 animate-pulse'}`} />
+              <span>{isTargetAchieved ? 'Target Achieved! ✓' : `${targetPct}% Completed`}</span>
+            </div>
+          </div>
+
+          {/* Metric cards grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-white/10 my-3">
+            <div>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Monthly Target</span>
+              <div className="text-[18px] sm:text-[20px] font-black font-display text-white mt-0.5 tabular-nums">
+                ₹2.50L
+              </div>
+              <span className="text-[10px] font-mono text-slate-400">Fixed quota</span>
+            </div>
+
+            <div>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Collected Till Now</span>
+              <div className="text-[18px] sm:text-[20px] font-black font-display text-emerald-400 mt-0.5 tabular-nums">
+                {fmtINR(targetMonthRecvd)}
+              </div>
+              <span className="text-[10px] font-mono text-emerald-300/80">Via received date</span>
+            </div>
+
+            <div>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Left to Collect</span>
+              <div className={`text-[18px] sm:text-[20px] font-black font-display mt-0.5 tabular-nums ${
+                isTargetAchieved ? 'text-emerald-400' : 'text-amber-400'
+              }`}>
+                {isTargetAchieved ? '₹0 (Goal Met)' : fmtINR(targetRemaining)}
+              </div>
+              <span className="text-[10px] font-mono text-slate-400">
+                {isTargetAchieved ? 'Target exceeded' : 'Remaining balance'}
+              </span>
+            </div>
+
+            <div>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Achievement Rate</span>
+              <div className="text-[18px] sm:text-[20px] font-black font-display text-white mt-0.5 tabular-nums">
+                {targetPct}%
+              </div>
+              <span className="text-[10px] font-mono text-slate-400">
+                {isTargetAchieved ? `+${(targetPct - 100).toFixed(1)}% above target` : `${(100 - targetPct).toFixed(1)}% left to go`}
+              </span>
+            </div>
+          </div>
+
+          {/* Visual Progress Bar */}
+          <div className="mt-2.5">
+            <div className="flex items-center justify-between text-[10.5px] font-mono mb-1.5">
+              <span className="text-slate-300">Progress: <strong className="text-emerald-400 font-bold">{fmtINR(targetMonthRecvd)}</strong> of ₹2.50L</span>
+              <span className="font-bold text-white">{targetPct}%</span>
+            </div>
+            <div className="relative h-2 w-full bg-white/10 rounded-full overflow-hidden border border-white/10">
+              <div
+                className={`h-full rounded-full transition-all duration-500 ${
+                  isTargetAchieved
+                    ? 'bg-gradient-to-r from-emerald-400 to-teal-400'
+                    : 'bg-gradient-to-r from-[#ff5e3a] via-[#ff4d30] to-emerald-400'
+                }`}
+                style={{ width: `${Math.min(targetPct, 100)}%` }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Mini KPI Grid: Spans 8 columns across the big screen */}
