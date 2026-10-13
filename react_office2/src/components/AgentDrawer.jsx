@@ -93,6 +93,7 @@ export default function AgentDrawer({ name, onClose }) {
   const ydayCashCases = actualYdayCash?.cases ?? 0;
   // 3. Monthly Target Tracking (₹2.50 Lakhs Target per Agent per Month)
   const TARGET_MONTHLY = 250000; // Fixed 2.5 Lakhs target
+  const lastMonth = agg.monthly.length ? agg.monthly[agg.monthly.length - 1] : null;
 
   const targetMonthStr = useMemo(() => {
     if (filterMode === 'month') return latestMonthStr;
@@ -199,8 +200,6 @@ export default function AgentDrawer({ name, onClose }) {
   }, [selectedDomains, rows, singleDate, isCustomRange, customFrom, customTo, name, ydayCashAmt, ydayCashCases]);
 
   const ydayRow = agg.daily.find((d) => d.date === YESTERDAY_STR);
-
-  const lastMonth = agg.monthly.length ? agg.monthly[agg.monthly.length - 1] : null;
 
   // Month-wise performance bar chart data
   const monthlyData = useMemo(
