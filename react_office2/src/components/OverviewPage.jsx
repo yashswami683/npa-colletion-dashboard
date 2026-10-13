@@ -216,13 +216,13 @@ export default function OverviewPage({ onOpenAgent }) {
         />
         <KpiCard
           index={1}
-          label="Yesterday Total Collection"
+          label="Yesterday Collection"
           raw={yesterdayAmount}
           format={fmtINR}
           sub={`${yesterdayCasesCount} cases collected`}
           dateRange={`RCV: ${ydayDateLabel}`}
           icon={Calendar}
-          tone="brand"
+          tone="amber"
         />
         <KpiCard
           index={2}
@@ -240,17 +240,17 @@ export default function OverviewPage({ onOpenAgent }) {
           format={() => `${(agg.modeCount?.['PART-PAYMENT'] || 0).toLocaleString('en-IN')} Part · ${(agg.modeCount?.['SETTLED'] || 0).toLocaleString('en-IN')} Settled`}
           sub={`${(agg.modeCount?.['CLOSED'] || 0).toLocaleString('en-IN')} Closed · ${(agg.modeCount?.['SETTLED ON DISBURSAL'] || 0).toLocaleString('en-IN')} Disbursal`}
           icon={CheckCircle2}
-          tone="live"
+          tone="teal"
           valueClassName="text-[17px] sm:text-[18px] xl:text-[19px]"
         />
         <KpiCard
           index={4}
-          label="Latest Month Recovery (Sep 2026)"
+          label="Sep 2026 Reconciled"
           raw={agg.sep2026Recvd}
           format={fmtINR}
-          sub="September 2026 reconciled collections"
+          sub="September 2026 collections"
           icon={TrendingUp}
-          tone="brand"
+          tone="indigo"
         />
       </div>
 
