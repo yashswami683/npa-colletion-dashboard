@@ -152,3 +152,176 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
 }
+
+/* =========================================================================
+   Executive Dark Mode Theme System
+   ========================================================================= */
+html.dark, html.dark body {
+  background-color: #090a0f !important;
+  color: #f1f5f9 !important;
+}
+
+html.dark body {
+  background: #090a0f !important;
+}
+
+/* Glassmorphism surfaces for dark theme */
+html.dark .glass-panel {
+  background: rgba(19, 26, 41, 0.85);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+html.dark .glass-panel-interactive {
+  background: rgba(19, 26, 41, 0.85);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+html.dark .glass-panel-interactive:hover {
+  background: rgba(26, 35, 54, 0.95);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* In dark mode, surface containers and card backgrounds */
+html.dark .bg-white {
+  background-color: #111726 !important;
+}
+
+html.dark .bg-white\/80,
+html.dark .bg-white\/85,
+html.dark .bg-white\/90 {
+  background-color: rgba(17, 23, 38, 0.85) !important;
+}
+
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/70,
+html.dark .bg-slate-50\/60,
+html.dark .bg-slate-100 {
+  background-color: #161e31 !important;
+}
+
+html.dark .hover\:bg-slate-50\/60:hover,
+html.dark .hover\:bg-slate-50\/70:hover,
+html.dark .hover\:bg-slate-100:hover,
+html.dark .hover\:bg-slate-200\/70:hover {
+  background-color: #1c263c !important;
+}
+
+/* Text adjustments in dark mode */
+html.dark .text-slate-900 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-slate-800 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-slate-700 {
+  color: #e2e8f0 !important;
+}
+
+html.dark .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+html.dark .text-slate-400 {
+  color: #64748b !important;
+}
+
+/* Borders in dark mode */
+html.dark .border-slate-200,
+html.dark .border-slate-200\/90,
+html.dark .border-slate-200\/80,
+html.dark .border-slate-200\/70,
+html.dark .border-slate-200\/60,
+html.dark .border-slate-100 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Dark mode date picker indicator */
+html.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+/* Dark scrollbars */
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tinted accents and pills in dark mode */
+html.dark .bg-orange-50,
+html.dark .bg-orange-50\/90,
+html.dark .bg-orange-50\/65 {
+  background-color: rgba(255, 94, 58, 0.12) !important;
+  border-color: rgba(255, 94, 58, 0.25) !important;
+}
+
+html.dark .bg-emerald-50,
+html.dark .bg-emerald-50\/60 {
+  background-color: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+
+html.dark .bg-amber-50,
+html.dark .bg-amber-50\/60 {
+  background-color: rgba(245, 158, 11, 0.12) !important;
+  border-color: rgba(245, 158, 11, 0.25) !important;
+}
+
+html.dark .bg-teal-50,
+html.dark .bg-teal-50\/60 {
+  background-color: rgba(20, 184, 166, 0.12) !important;
+  border-color: rgba(20, 184, 166, 0.25) !important;
+}
+
+html.dark .bg-indigo-50,
+html.dark .bg-indigo-50\/60 {
+  background-color: rgba(99, 102, 241, 0.12) !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+}
+
+/* Card gradient containers in dark mode */
+html.dark .from-orange-50\/65,
+html.dark .from-teal-50\/60,
+html.dark .from-indigo-50\/60,
+html.dark .from-amber-50\/60,
+html.dark .from-emerald-50\/60 {
+  --tw-gradient-from: #151d2e !important;
+}
+
+html.dark .via-white,
+html.dark .to-white {
+  --tw-gradient-via: #111726 !important;
+  --tw-gradient-to: #111726 !important;
+}
+
+/* Dark mode table polish */
+html.dark th {
+  color: #94a3b8 !important;
+}
+html.dark th:hover {
+  color: #f8fafc !important;
+}
+html.dark tr.bg-slate-100\/70,
+html.dark tr.bg-slate-50\/60 {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+html.dark tr:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+html.dark input,
+html.dark select {
+  background-color: #141b2a !important;
+  color: #f1f5f9 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}

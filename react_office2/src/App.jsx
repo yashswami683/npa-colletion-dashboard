@@ -14,6 +14,7 @@ import LeaderDrawer from './components/LeaderDrawer';
 import { AuthProvider } from './context/AuthContext';
 import { LiveCollectionProvider, useLiveCollection } from './context/LiveCollectionContext';
 import { DomainProvider } from './context/DomainContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { useAuth } from './utils/auth';
 import { fetchDashboardData } from './utils/data';
 
@@ -48,6 +49,7 @@ function buildUrl(targetPage, targetAgent, targetLeader) {
 
 function Dashboard() {
   const { user } = useAuth();
+  const { isDark } = useTheme();
   const { dataRevision } = useLiveCollection();
   const [page, setPageState] = useState(() => parseLocationParams().page);
   const [openAgent, setOpenAgentState] = useState(() => parseLocationParams().agent);
@@ -202,9 +204,13 @@ function Dashboard() {
 
   return (
     <DomainProvider>
-      <div className="relative min-h-screen bg-[#f8fafc] text-slate-800 selection:bg-[#ff5e3a]/20 selection:text-[#ff3b30] animate-fade-in">
+      <div className={`relative min-h-screen ${isDark ? 'bg-[#090a0f] text-slate-100' : 'bg-[#f8fafc] text-slate-800'} selection:bg-[#ff5e3a]/20 selection:text-[#ff3b30] animate-fade-in transition-colors duration-300`}>
         {/* Subtle executive ambient gradients */}
-        <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_70%_50%_at_20%_-15%,rgba(255,94,58,0.07),transparent_70%),radial-gradient(ellipse_60%_50%_at_80%_-15%,rgba(99,102,241,0.04),transparent_70%)]" />
+        <div className={`fixed inset-0 pointer-events-none z-0 ${
+          isDark
+            ? 'bg-[radial-gradient(ellipse_70%_50%_at_20%_-15%,rgba(255,94,58,0.12),transparent_70%),radial-gradient(ellipse_60%_50%_at_80%_-15%,rgba(99,102,241,0.08),transparent_70%)]'
+            : 'bg-[radial-gradient(ellipse_70%_50%_at_20%_-15%,rgba(255,94,58,0.07),transparent_70%),radial-gradient(ellipse_60%_50%_at_80%_-15%,rgba(99,102,241,0.04),transparent_70%)]'
+        }`} />
 
         {/* Dashboard Core Layout */}
         <div className="relative z-10 flex min-h-screen w-full">
@@ -239,10 +245,12 @@ function Dashboard() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <LiveCollectionProvider>
-        <Dashboard />
-      </LiveCollectionProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <LiveCollectionProvider>
+          <Dashboard />
+        </LiveCollectionProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

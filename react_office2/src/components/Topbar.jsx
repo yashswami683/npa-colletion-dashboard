@@ -1,6 +1,7 @@
-import { Bell, LayoutGrid, HelpCircle } from 'lucide-react';
+import { Bell, LayoutGrid, HelpCircle, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../utils/auth';
 import { useLiveCollection } from '../context/LiveCollectionContext';
+import { useTheme } from '../context/ThemeContext';
 import { fmtINR } from '../utils/data';
 
 const TITLES = {
@@ -16,6 +17,7 @@ export default function Topbar({ page }) {
   const [section, pageTitle] = TITLES[page] || ['Dashboard', 'Overview'];
   const { user } = useAuth();
   const { totalLiveToday, totalLiveCases } = useLiveCollection();
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-2xl border-b border-slate-200/80 px-8 py-3.5 flex items-center justify-between shadow-[0_1px_10px_rgba(0,0,0,0.02)]">
@@ -56,6 +58,20 @@ export default function Topbar({ page }) {
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           <span>Auto-sync 3m</span>
         </div>
+
+        {/* Executive Theme Changing Button (Light / Dark) */}
+        <button
+          onClick={toggleTheme}
+          title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          className="relative w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-all duration-200 cursor-pointer shadow-2xs group"
+        >
+          {isDark ? (
+            <Sun size={15} strokeWidth={2.4} className="text-amber-400 group-hover:rotate-45 transition-transform duration-300" />
+          ) : (
+            <Moon size={15} strokeWidth={2.4} className="text-slate-600 group-hover:-rotate-12 transition-transform duration-300" />
+          )}
+        </button>
 
         <button 
           title="App Switcher" 
