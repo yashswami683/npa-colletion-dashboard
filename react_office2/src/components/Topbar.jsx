@@ -50,13 +50,13 @@ export default function Topbar({ page }) {
           </span>
         </div>
 
-        {/* 3-Minute Auto-Sync Indicator */}
+        {/* 10-Minute Auto-Sync Indicator */}
         <div 
-          title="Auto-Sync Active: The entire dashboard automatically synchronizes with your Google Sheet every 3 minutes."
+          title="Auto-Sync Active: The entire dashboard automatically synchronizes with your Google Sheet every 10 minutes."
           className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-[11px] font-mono select-none"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Auto-sync 3m</span>
+          <span>Auto-sync 10m</span>
         </div>
 
         {/* Executive Theme Changing Button (Light / Dark) */}

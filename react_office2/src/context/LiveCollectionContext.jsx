@@ -109,15 +109,15 @@ export function LiveCollectionProvider({ children }) {
     };
   }, []);
 
-  // Automatic full synchronization every 3 minutes (180,000 ms)
+  // Automatic full synchronization every 10 minutes (600,000 ms)
   useEffect(() => {
     let isMounted = true;
     const interval = setInterval(() => {
       if (isMounted) {
-        console.log('[AutoSync] Running 3-minute Google Sheet sync...');
+        console.log('[AutoSync] Running 10-minute Google Sheet sync...');
         refreshAllData(false);
       }
-    }, 180000); // 3 minutes
+    }, 600000); // 10 minutes
 
     return () => {
       isMounted = false;
