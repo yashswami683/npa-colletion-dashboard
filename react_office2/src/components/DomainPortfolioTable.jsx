@@ -185,27 +185,27 @@ export default function DomainPortfolioTable() {
   const formatMoney = (val) => (showExact ? fmtINRFull(val) : fmtINR(val));
 
   return (
-    <div className="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-[0_1px_3px_rgba(0,0,0,0.02)] space-y-3.5 transition-all">
+    <div className="bg-white dark:bg-slate-900/95 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 sm:p-5 shadow-[0_1px_3px_rgba(0,0,0,0.02)] space-y-3.5 transition-all">
       {/* Sleek Minimalist Header Toolbar */}
-      <div className="flex items-center justify-between flex-wrap gap-3 pb-3 border-b border-slate-100">
+      <div className="flex items-center justify-between flex-wrap gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
         {/* Title & Active Filter Chip */}
         <div className="flex items-center gap-2.5 flex-wrap">
           <div className="flex items-center gap-2">
-            <h3 className="text-[14px] font-semibold text-slate-900 tracking-tight">
+            <h3 className="text-[14px] font-semibold text-slate-900 dark:text-white tracking-tight">
               Portfolio by Brand
             </h3>
-            <span className="text-[11px] font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200/60">
+            <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full border border-slate-200/60 dark:border-slate-700">
               {rows.length} brands
             </span>
           </div>
 
           {isDomainActive && (
-            <div className="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-700 bg-slate-100 hover:bg-slate-200/80 pl-2.5 pr-1.5 py-0.5 rounded-full border border-slate-200 transition-colors">
-              <span>Filter: <strong className="text-slate-900 font-semibold">{selectedDomains.size > 0 ? Array.from(selectedDomains).join(", ") : "All Domains"}</strong></span>
+            <div className="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200/80 dark:hover:bg-slate-700 pl-2.5 pr-1.5 py-0.5 rounded-full border border-slate-200 dark:border-slate-700 transition-colors">
+              <span>Filter: <strong className="text-slate-900 dark:text-white font-semibold">{selectedDomains.size > 0 ? Array.from(selectedDomains).join(", ") : "All Domains"}</strong></span>
               <button
                 type="button"
                 onClick={clearDomain}
-                className="p-0.5 hover:bg-slate-300/60 rounded-full transition-colors cursor-pointer text-slate-500 hover:text-slate-800"
+                className="p-0.5 hover:bg-slate-300/60 dark:hover:bg-slate-700 rounded-full transition-colors cursor-pointer text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
                 aria-label="Remove filter"
               >
                 <X size={12} />
@@ -217,14 +217,14 @@ export default function DomainPortfolioTable() {
         {/* Minimal Controls */}
         <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
           {/* Format Switcher (iOS/Linear Segmented Style) */}
-          <div className="flex bg-slate-100/90 p-0.5 rounded-lg border border-slate-200/60 text-[11px]">
+          <div className="flex bg-slate-100/90 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200/60 dark:border-slate-700 text-[11px]">
             <button
               type="button"
               onClick={() => setShowExact(false)}
               className={`px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer ${
                 !showExact
-                  ? 'bg-white text-slate-900 shadow-2xs font-semibold'
-                  : 'text-slate-500 hover:text-slate-800'
+                  ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white'
               }`}
             >
               Compact
@@ -234,8 +234,8 @@ export default function DomainPortfolioTable() {
               onClick={() => setShowExact(true)}
               className={`px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer ${
                 showExact
-                  ? 'bg-white text-slate-900 shadow-2xs font-semibold'
-                  : 'text-slate-500 hover:text-slate-800'
+                  ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white'
               }`}
             >
               Full ₹
@@ -250,13 +250,13 @@ export default function DomainPortfolioTable() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search..."
-              className="pl-7 pr-6 py-1 text-[11.5px] text-slate-800 placeholder-slate-400 bg-slate-50/80 hover:bg-slate-100/70 focus:bg-white border border-slate-200/80 focus:border-slate-400 rounded-lg outline-none w-32 sm:w-40 transition-all"
+              className="pl-7 pr-6 py-1 text-[11.5px] text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 bg-slate-50/80 dark:bg-slate-800/80 hover:bg-slate-100/70 dark:hover:bg-slate-800 focus:bg-white dark:focus:bg-slate-800 border border-slate-200/80 dark:border-slate-700 focus:border-slate-400 dark:focus:border-slate-500 rounded-lg outline-none w-32 sm:w-40 transition-all"
             />
             {search && (
               <button
                 type="button"
                 onClick={() => setSearch('')}
-                className="absolute right-2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                className="absolute right-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer"
               >
                 <X size={11} />
               </button>
@@ -268,11 +268,11 @@ export default function DomainPortfolioTable() {
       {/* Clean Minimalist Table Container */}
       <div
         ref={tableContainerRef}
-        className="max-h-[340px] overflow-y-auto overscroll-contain overflow-x-auto pr-1 select-none rounded-xl border border-slate-100/90"
+        className="max-h-[340px] overflow-y-auto overscroll-contain overflow-x-auto pr-1 select-none rounded-xl border border-slate-100/90 dark:border-slate-800"
       >
         <table className="w-full text-[12px] border-collapse">
           {/* Sticky Sleek Table Header */}
-          <thead className="sticky top-0 bg-white/95 backdrop-blur-md z-10 border-b border-slate-200/80">
+          <thead className="sticky top-0 bg-white/95 dark:bg-[#111726]/98 backdrop-blur-md z-10 border-b border-slate-200/80 dark:border-slate-800">
             <tr>
               {cols.map((c) => {
                 const isSorted = sortKey === c.key;
@@ -280,15 +280,15 @@ export default function DomainPortfolioTable() {
                   <th
                     key={c.key}
                     onClick={() => toggleSort(c.key)}
-                    className={`${c.align} text-[10.5px] font-semibold text-slate-400 hover:text-slate-700 uppercase tracking-wider py-2.5 px-3 cursor-pointer select-none transition-colors whitespace-nowrap`}
+                    className={`${c.align} text-[10.5px] font-semibold text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 uppercase tracking-wider py-2.5 px-3 cursor-pointer select-none transition-colors whitespace-nowrap`}
                   >
                     <div className={`inline-flex items-center gap-1 ${c.align === 'text-right' ? 'justify-end' : ''}`}>
-                      <span className={isSorted ? 'text-slate-800 font-bold' : ''}>{c.label}</span>
+                      <span className={isSorted ? 'text-slate-800 dark:text-white font-bold' : ''}>{c.label}</span>
                       {isSorted ? (
                         sortDir === 1 ? (
-                          <ArrowUp size={11} className="text-slate-800 shrink-0" />
+                          <ArrowUp size={11} className="text-slate-800 dark:text-white shrink-0" />
                         ) : (
-                          <ArrowDown size={11} className="text-slate-800 shrink-0" />
+                          <ArrowDown size={11} className="text-slate-800 dark:text-white shrink-0" />
                         )
                       ) : (
                         <ArrowUpDown size={10} className="opacity-25 hover:opacity-60 shrink-0" />
@@ -300,25 +300,25 @@ export default function DomainPortfolioTable() {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-slate-100/80">
+          <tbody className="divide-y divide-slate-100/80 dark:divide-slate-800/80">
             {/* Master Consolidated Summary Row */}
             <tr
               onClick={() => clearDomain()}
               className={`cursor-pointer transition-colors ${
                 selectedDomains.size === 0
-                  ? 'bg-slate-100/70 border-l-2 border-l-slate-900 font-medium'
-                  : 'bg-slate-50/60 hover:bg-slate-100/50'
+                  ? 'bg-slate-100/70 dark:bg-slate-800/80 border-l-2 border-l-slate-900 dark:border-l-orange-500 font-medium'
+                  : 'bg-slate-50/60 dark:bg-slate-900/50 hover:bg-slate-100/50 dark:hover:bg-slate-800/60'
               }`}
             >
               {/* Domain Name */}
               <td className="py-2.5 px-3">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-slate-400 shrink-0" />
-                  <span className="font-semibold text-slate-900 text-[12.5px]">
+                  <span className="font-semibold text-slate-900 dark:text-white text-[12.5px]">
                     All Domains (Consolidated)
                   </span>
                   {selectedDomains.size === 0 && (
-                    <span className="text-[9.5px] font-medium px-1.5 py-0.2 rounded bg-slate-200 text-slate-700">
+                    <span className="text-[9.5px] font-medium px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200">
                       All
                     </span>
                   )}
@@ -326,22 +326,22 @@ export default function DomainPortfolioTable() {
               </td>
 
               {/* Cases */}
-              <td className="py-2.5 px-3 text-right font-mono text-slate-600 tabular-nums">
+              <td className="py-2.5 px-3 text-right font-mono text-slate-600 dark:text-slate-400 tabular-nums">
                 {allDomainsRow.cases.toLocaleString('en-IN')}
               </td>
 
               {/* Total Due */}
-              <td className="py-2.5 px-3 text-right font-mono font-semibold text-slate-900 tabular-nums">
+              <td className="py-2.5 px-3 text-right font-mono font-semibold text-slate-900 dark:text-white tabular-nums">
                 {formatMoney(allDomainsRow.due)}
               </td>
 
               {/* Remaining */}
-              <td className="py-2.5 px-3 text-right font-mono text-slate-500 tabular-nums">
+              <td className="py-2.5 px-3 text-right font-mono text-slate-500 dark:text-slate-400 tabular-nums">
                 {formatMoney(allDomainsRow.pending)}
               </td>
 
               {/* Today Live */}
-              <td className="py-2.5 px-3 text-right font-mono font-bold text-emerald-600 tabular-nums">
+              <td className="py-2.5 px-3 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">
                 {allDomainsRow.todayLive > 0 ? (
                   <span className="inline-flex items-center gap-1 justify-end">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -351,32 +351,32 @@ export default function DomainPortfolioTable() {
               </td>
 
               {/* Yesterday */}
-              <td className="py-2.5 px-3 text-right font-mono font-bold text-slate-800 tabular-nums">
+              <td className="py-2.5 px-3 text-right font-mono font-bold text-slate-800 dark:text-slate-200 tabular-nums">
                 {formatMoney(allDomainsRow.yesterday)}
               </td>
 
               {/* Last Mo (Sep 2026) */}
-              <td className="py-2.5 px-3 text-right font-mono text-slate-700 font-medium tabular-nums">
+              <td className="py-2.5 px-3 text-right font-mono text-slate-700 dark:text-slate-300 font-medium tabular-nums">
                 {formatMoney(allDomainsRow.sep2026Recvd)}
               </td>
 
               {/* Collected */}
-              <td className="py-2.5 px-3 text-right font-mono font-medium text-slate-800 tabular-nums">
+              <td className="py-2.5 px-3 text-right font-mono font-medium text-slate-800 dark:text-slate-200 tabular-nums">
                 {formatMoney(allDomainsRow.recvd)}
               </td>
 
               {/* Disbursed */}
-              <td className="py-2.5 px-3 text-right font-mono text-slate-500 tabular-nums">
+              <td className="py-2.5 px-3 text-right font-mono text-slate-500 dark:text-slate-400 tabular-nums">
                 {formatMoney(allDomainsRow.principal)}
               </td>
 
               {/* Recovery % */}
               <td className="py-2.5 px-3 text-right whitespace-nowrap">
                 <div className="inline-flex items-center gap-1.5 justify-end">
-                  <span className="font-mono font-semibold text-slate-800 tabular-nums">
+                  <span className="font-mono font-semibold text-slate-800 dark:text-slate-200 tabular-nums">
                     {allDomainsRow.pct.toFixed(2)}%
                   </span>
-                  <span className="text-[10px] font-medium px-1.5 py-0.2 rounded bg-slate-200/70 text-slate-600">
+                  <span className="text-[10px] font-medium px-1.5 py-0.2 rounded bg-slate-200/70 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
                     Total
                   </span>
                 </div>
@@ -402,17 +402,17 @@ export default function DomainPortfolioTable() {
                     onClick={() => toggleDomain(d.name)}
                     className={`cursor-pointer transition-colors group ${
                       isSelected
-                        ? 'bg-slate-100/70 border-l-2 border-l-slate-900'
-                        : 'hover:bg-slate-50/70'
+                        ? 'bg-slate-100/70 dark:bg-slate-800/80 border-l-2 border-l-slate-900 dark:border-l-orange-500'
+                        : 'hover:bg-slate-50/70 dark:hover:bg-slate-800/50'
                     }`}
                   >
                     {/* Domain / Brand name with colored dot indicator */}
-                    <td className="py-2.5 px-3 font-medium text-slate-800 group-hover:text-slate-900 transition-colors whitespace-nowrap">
+                    <td className="py-2.5 px-3 font-medium text-slate-800 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors whitespace-nowrap">
                       <div className="flex items-center gap-2">
                         <span className={`w-2 h-2 rounded-full shrink-0 ${dotColor}`} />
                         <span className="text-[12.5px] font-medium">{d.name}</span>
                         {isSelected && (
-                          <span className="text-[9.5px] font-medium px-1.5 py-0.2 rounded bg-slate-900 text-white">
+                          <span className="text-[9.5px] font-medium px-1.5 py-0.2 rounded bg-slate-900 dark:bg-orange-500 text-white font-bold">
                             Active
                           </span>
                         )}
@@ -420,64 +420,64 @@ export default function DomainPortfolioTable() {
                     </td>
 
                     {/* Cases */}
-                    <td className="py-2.5 px-3 text-right font-mono text-slate-500 tabular-nums">
+                    <td className="py-2.5 px-3 text-right font-mono text-slate-500 dark:text-slate-400 tabular-nums">
                       {d.cases.toLocaleString('en-IN')}
                     </td>
 
                     {/* Money to Collect (Total Due Scope) */}
-                    <td className="py-2.5 px-3 text-right font-mono font-semibold text-slate-900 tabular-nums">
+                    <td className="py-2.5 px-3 text-right font-mono font-semibold text-slate-900 dark:text-white tabular-nums">
                       {formatMoney(d.due)}
                     </td>
 
                     {/* Remaining Pending */}
-                    <td className="py-2.5 px-3 text-right font-mono text-slate-500 tabular-nums">
+                    <td className="py-2.5 px-3 text-right font-mono text-slate-500 dark:text-slate-400 tabular-nums">
                       {formatMoney(d.pending)}
                     </td>
 
                     {/* Today Live */}
                     <td className="py-2.5 px-3 text-right font-mono tabular-nums">
                       {d.todayLive > 0 ? (
-                        <span className="text-emerald-700 font-bold inline-flex items-center gap-1 justify-end">
+                        <span className="text-emerald-700 dark:text-emerald-400 font-bold inline-flex items-center gap-1 justify-end">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                           {formatMoney(d.todayLive)}
                         </span>
                       ) : (
-                        <span className="text-slate-300 font-normal">—</span>
+                        <span className="text-slate-300 dark:text-slate-600 font-normal">—</span>
                       )}
                     </td>
 
                     {/* Yesterday */}
                     <td className="py-2.5 px-3 text-right font-mono tabular-nums">
                       {d.yesterday > 0 ? (
-                        <span className="text-slate-800 font-semibold">{formatMoney(d.yesterday)}</span>
+                        <span className="text-slate-800 dark:text-slate-200 font-semibold">{formatMoney(d.yesterday)}</span>
                       ) : (
-                        <span className="text-slate-300 font-normal">—</span>
+                        <span className="text-slate-300 dark:text-slate-600 font-normal">—</span>
                       )}
                     </td>
 
                     {/* Last Month (Sep 2026) Collection */}
                     <td className="py-2.5 px-3 text-right font-mono tabular-nums">
                       {d.sep2026Recvd > 0 ? (
-                        <span className="text-slate-700 font-medium">{formatMoney(d.sep2026Recvd)}</span>
+                        <span className="text-slate-700 dark:text-slate-300 font-medium">{formatMoney(d.sep2026Recvd)}</span>
                       ) : (
-                        <span className="text-slate-300 font-normal">—</span>
+                        <span className="text-slate-300 dark:text-slate-600 font-normal">—</span>
                       )}
                     </td>
 
                     {/* Total Received / Recovered */}
-                    <td className="py-2.5 px-3 text-right font-mono font-medium text-slate-800 tabular-nums">
+                    <td className="py-2.5 px-3 text-right font-mono font-medium text-slate-800 dark:text-slate-200 tabular-nums">
                       {formatMoney(d.recvd)}
                     </td>
 
                     {/* Disbursed Principal */}
-                    <td className="py-2.5 px-3 text-right font-mono text-slate-400 tabular-nums">
+                    <td className="py-2.5 px-3 text-right font-mono text-slate-400 dark:text-slate-500 tabular-nums">
                       {formatMoney(d.principal)}
                     </td>
 
                     {/* Recovery % + Minimalist badge */}
                     <td className="py-2.5 px-3 text-right whitespace-nowrap">
                       <div className="inline-flex items-center gap-1.5 justify-end">
-                        <span className="font-mono font-medium text-slate-800 tabular-nums">
+                        <span className="font-mono font-medium text-slate-800 dark:text-slate-200 tabular-nums">
                           {d.pct.toFixed(2)}%
                         </span>
                         <span className={`text-[9.5px] font-medium px-1.5 py-0.2 rounded ${style.badge}`}>

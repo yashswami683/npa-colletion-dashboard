@@ -130,19 +130,19 @@ export default function CollectionTrendChart({ agg, selectedDomains }) {
   const recoveryPct = totalDue > 0 ? round1((totalRecvd / totalDue) * 100) : 0;
 
   return (
-    <div className="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-[0_1px_3px_rgba(0,0,0,0.02)] space-y-4 transition-all">
+    <div className="bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 sm:p-5 shadow-[0_1px_3px_rgba(0,0,0,0.02)] space-y-4 transition-all">
       {/* Header Toolbar */}
-      <div className="flex items-center justify-between flex-wrap gap-3 pb-3 border-b border-slate-100">
+      <div className="flex items-center justify-between flex-wrap gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-[14px] font-semibold text-slate-900 tracking-tight">
+            <h3 className="text-[14px] font-semibold text-slate-900 dark:text-white tracking-tight">
               Collection Trend &amp; Trajectory
             </h3>
-            <span className="text-[11px] font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200/60">
+            <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full border border-slate-200/60 dark:border-slate-700">
               {selectedDomains.size > 0 ? Array.from(selectedDomains).join(", ") : "All Domains"}
             </span>
           </div>
-          <p className="text-[11.5px] text-slate-500 mt-0.5">
+          <p className="text-[11.5px] text-slate-500 dark:text-slate-400 mt-0.5">
             {viewMode === 'weekly' && 'Weekly aggregated repayment due vs. actual collections (eliminates daily spikes)'}
             {viewMode === 'cumulative' && 'Cumulative portfolio collection S-curve closing the due recovery gap'}
             {viewMode === 'daily' && `Day-by-day collection schedule vs. recovered cash (${dailyRange === 'all' ? 'All Days' : `Last ${dailyRange} Days`})`}
@@ -152,7 +152,7 @@ export default function CollectionTrendChart({ agg, selectedDomains }) {
         {/* View Switchers */}
         <div className="flex items-center gap-2 flex-wrap">
           {/* View Mode Toggle: Weekly | Cumulative | Daily */}
-          <div className="flex bg-slate-100/90 p-0.5 rounded-lg border border-slate-200/60 text-[11px]">
+          <div className="flex bg-slate-100/90 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200/60 dark:border-slate-700 text-[11px]">
             {VIEW_MODES.map((mode) => {
               const Icon = mode.icon;
               const isActive = viewMode === mode.key;
@@ -163,8 +163,8 @@ export default function CollectionTrendChart({ agg, selectedDomains }) {
                   onClick={() => setViewMode(mode.key)}
                   className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-white text-slate-900 shadow-2xs font-semibold'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                   title={mode.hint}
                 >
@@ -177,7 +177,7 @@ export default function CollectionTrendChart({ agg, selectedDomains }) {
 
           {/* Daily Range Selector (Visible only when in Daily mode) */}
           {viewMode === 'daily' && (
-            <div className="flex bg-slate-100/90 p-0.5 rounded-lg border border-slate-200/60 text-[11px] animate-fade-in">
+            <div className="flex bg-slate-100/90 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200/60 dark:border-slate-700 text-[11px] animate-fade-in">
               {RANGES.map((r) => (
                 <button
                   key={r.key}
@@ -185,8 +185,8 @@ export default function CollectionTrendChart({ agg, selectedDomains }) {
                   onClick={() => setDailyRange(r.key)}
                   className={`px-2 py-0.5 rounded-md font-medium transition-all cursor-pointer ${
                     dailyRange === r.key
-                      ? 'bg-slate-900 text-white shadow-2xs font-semibold'
-                      : 'text-slate-500 hover:text-slate-900'
+                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-950 shadow-2xs font-semibold'
+                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   {r.label}
@@ -198,22 +198,22 @@ export default function CollectionTrendChart({ agg, selectedDomains }) {
       </div>
 
       {/* Mini Metric Strip Above Chart */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 py-2 px-3 bg-slate-50/70 border border-slate-100 rounded-xl text-[11.5px]">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 py-2 px-3 bg-slate-50/70 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 rounded-xl text-[11.5px]">
         <div>
-          <span className="text-slate-400 text-[10.5px] uppercase font-semibold">Scheduled Due</span>
-          <div className="font-mono font-bold text-slate-800 text-[13px]">{fmtINR(totalDue)}</div>
+          <span className="text-slate-400 dark:text-slate-400 text-[10.5px] uppercase font-semibold">Scheduled Due</span>
+          <div className="font-mono font-bold text-slate-800 dark:text-slate-100 text-[13px]">{fmtINR(totalDue)}</div>
         </div>
         <div>
-          <span className="text-slate-400 text-[10.5px] uppercase font-semibold">Total Recovered</span>
+          <span className="text-slate-400 dark:text-slate-400 text-[10.5px] uppercase font-semibold">Total Recovered</span>
           <div className="font-mono font-bold text-[#ff4d30] text-[13px]">{fmtINR(totalRecvd)}</div>
         </div>
         <div>
-          <span className="text-slate-400 text-[10.5px] uppercase font-semibold">Recovery Rate</span>
+          <span className="text-slate-400 dark:text-slate-400 text-[10.5px] uppercase font-semibold">Recovery Rate</span>
           <div className="flex items-center gap-1.5 mt-0.5">
-            <span className="font-mono font-bold text-slate-900 text-[13px]">{recoveryPct.toFixed(2)}%</span>
+            <span className="font-mono font-bold text-slate-900 dark:text-white text-[13px]">{recoveryPct.toFixed(2)}%</span>
             <span
               className={`text-[9.5px] font-medium px-1.5 py-0.2 rounded ${
-                recoveryPct >= 25 ? 'bg-emerald-100 text-emerald-800' : recoveryPct >= 15 ? 'bg-amber-100 text-amber-800' : 'bg-slate-200 text-slate-700'
+                recoveryPct >= 25 ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30' : recoveryPct >= 15 ? 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30' : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
               }`}
             >
               {recoveryPct >= 25 ? 'On target' : recoveryPct >= 15 ? 'Moderate' : 'Under target'}
@@ -221,8 +221,8 @@ export default function CollectionTrendChart({ agg, selectedDomains }) {
           </div>
         </div>
         <div>
-          <span className="text-slate-400 text-[10.5px] uppercase font-semibold">Peak Collection</span>
-          <div className="font-mono font-medium text-slate-700 text-[12px] truncate">
+          <span className="text-slate-400 dark:text-slate-400 text-[10.5px] uppercase font-semibold">Peak Collection</span>
+          <div className="font-mono font-medium text-slate-700 dark:text-slate-300 text-[12px] truncate">
             {peakItem ? `${fmtINR(viewMode === 'cumulative' ? (peakItem.dailyRecvd ?? 0) : peakItem.recvd)} (${peakItem.label})` : '—'}
           </div>
         </div>
@@ -378,24 +378,24 @@ function TrendTooltip({ active, payload, label, viewMode }) {
     const pct = dueVal > 0 ? round1((recvdVal / dueVal) * 100) : 0;
 
     return (
-      <div className="bg-white border border-slate-200/90 rounded-xl p-3 shadow-xl backdrop-blur-md text-slate-800 text-[11.5px] min-w-[180px]">
-        <div className="font-semibold text-slate-800 pb-1.5 mb-1.5 border-b border-slate-100 flex items-center justify-between">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-xl p-3 shadow-xl backdrop-blur-md text-slate-800 dark:text-slate-200 text-[11.5px] min-w-[180px]">
+        <div className="font-semibold text-slate-800 dark:text-white pb-1.5 mb-1.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
           <span>{item.fullLabel || item.fullDate || label}</span>
-          <span className="font-mono text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-700">
+          <span className="font-mono text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
             {pct.toFixed(1)}% Reco
           </span>
         </div>
 
         <div className="space-y-1 font-mono">
-          <div className="flex justify-between items-center text-slate-500">
+          <div className="flex justify-between items-center text-slate-500 dark:text-slate-400">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-sm bg-slate-300" />
+              <span className="w-2 h-2 rounded-sm bg-slate-300 dark:bg-slate-600" />
               <span>Due Target:</span>
             </span>
-            <span className="font-semibold text-slate-800">{fmtINRFull(dueVal)}</span>
+            <span className="font-semibold text-slate-800 dark:text-slate-100">{fmtINRFull(dueVal)}</span>
           </div>
 
-          <div className="flex justify-between items-center text-slate-500">
+          <div className="flex justify-between items-center text-slate-500 dark:text-slate-400">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-sm bg-[#ff3b30]" />
               <span>Recovered:</span>
@@ -404,7 +404,7 @@ function TrendTooltip({ active, payload, label, viewMode }) {
           </div>
 
           {viewMode === 'cumulative' && item.dailyRecvd !== undefined && (
-            <div className="flex justify-between items-center text-slate-400 text-[10.5px] pt-1 border-t border-slate-100">
+            <div className="flex justify-between items-center text-slate-400 dark:text-slate-500 text-[10.5px] pt-1 border-t border-slate-100 dark:border-slate-800">
               <span>Period Inflow:</span>
               <span>{fmtINR(item.dailyRecvd)}</span>
             </div>

@@ -208,15 +208,15 @@ export default function EmployeesPage({ onOpenAgent }) {
 
       {/* Sort & Status Pills */}
       <div className="flex items-center gap-3 flex-wrap">
-        <div className="flex bg-slate-100 border border-slate-200 rounded-xl p-0.5 gap-0.5">
+        <div className="flex bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl p-0.5 gap-0.5">
           {[['recvd', 'Sort: Collection'], ['liveRecvd', 'Sort: Live Today'], ['pct', 'Sort: Recovery %'], ['cases', 'Sort: Cases']].map(([val, label]) => (
             <button
               key={val}
               onClick={() => setSortKey(val)}
               className={`text-[11.5px] font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 sortKey === val
-                  ? (val === 'liveRecvd' ? 'bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-xs' : 'bg-white text-slate-900 shadow-xs border border-slate-200/60')
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? (val === 'liveRecvd' ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30 shadow-xs' : 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs border border-slate-200/60 dark:border-slate-600')
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               {val === 'liveRecvd' && <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse mr-1.5" />}
@@ -225,7 +225,7 @@ export default function EmployeesPage({ onOpenAgent }) {
           ))}
         </div>
 
-        <div className="flex bg-slate-100 border border-slate-200 rounded-xl p-0.5 gap-0.5">
+        <div className="flex bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl p-0.5 gap-0.5">
           {[['', 'All'], ['good', 'On track (≥70%)'], ['mid', 'Review (60-70%)'], ['low', 'Below target (<60%)']].map(([val, label]) => (
             <button
               key={val}
@@ -233,7 +233,7 @@ export default function EmployeesPage({ onOpenAgent }) {
               className={`text-[11.5px] font-bold px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 statusFilter === val
                   ? 'bg-gradient-to-r from-[#ff5e3a] to-[#ff3b30] text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               {label}
@@ -242,15 +242,15 @@ export default function EmployeesPage({ onOpenAgent }) {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
-          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-display">Format:</span>
-          <div className="flex bg-slate-100 border border-slate-200 rounded-xl p-0.5 gap-0.5 shadow-inner">
+          <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider font-display">Format:</span>
+          <div className="flex bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl p-0.5 gap-0.5 shadow-inner">
             <button
               type="button"
               onClick={() => setShowExact(false)}
               className={`text-[11.5px] font-bold px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                 !showExact
-                  ? 'bg-white text-slate-900 shadow-xs border border-slate-200/60'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs border border-slate-200/60 dark:border-slate-600'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               Compact (L/Cr)
@@ -261,7 +261,7 @@ export default function EmployeesPage({ onOpenAgent }) {
               className={`text-[11.5px] font-bold px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                 showExact
                   ? 'bg-gradient-to-r from-[#ff5e3a] to-[#ff3b30] text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               ₹ Exact Rupees (Sheet Match)
@@ -272,7 +272,7 @@ export default function EmployeesPage({ onOpenAgent }) {
 
       {/* Cards Grid */}
       {rows.length === 0 ? (
-        <div className="text-center py-20 text-slate-400 text-[13px] font-medium bg-white rounded-2xl border border-slate-200">
+        <div className="text-center py-20 text-slate-400 text-[13px] font-medium bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
           No collection agents match this filter.
         </div>
       ) : (
@@ -283,21 +283,21 @@ export default function EmployeesPage({ onOpenAgent }) {
               <div
                 key={e.name}
                 onClick={() => onOpenAgent(e.name)}
-                className="bg-white backdrop-blur-xl border border-slate-200/90 hover:border-slate-300 rounded-2xl p-5 shadow-sm transition-all cursor-pointer group hover:-translate-y-1 hover:shadow-md"
+                className="bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 rounded-2xl p-5 shadow-sm transition-all cursor-pointer group hover:-translate-y-1 hover:shadow-md"
               >
                 {/* Header: Avatar, Name, Leader, Rank */}
                 <div className="flex items-center gap-3 mb-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 text-slate-800 font-display font-extrabold flex items-center justify-center text-[13px] shadow-xs shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-100 font-display font-extrabold flex items-center justify-center text-[13px] shadow-xs shrink-0">
                     {initials(e.name)}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="text-[14px] font-bold text-slate-900 group-hover:text-[#ff4d30] transition-colors truncate font-display">
+                    <div className="text-[14px] font-bold text-slate-900 dark:text-white group-hover:text-[#ff4d30] transition-colors truncate font-display">
                       {e.name}
                     </div>
-                    <div className="text-[11px] font-medium text-slate-500 truncate flex items-center gap-1.5 flex-wrap">
+                    <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate flex items-center gap-1.5 flex-wrap">
                       <span>{titleCase(e.leader)}</span>
                       <span>·</span>
-                      <span className="text-slate-700 font-mono font-semibold" title={fmtINRFull(e.due)}>
+                      <span className="text-slate-700 dark:text-slate-300 font-mono font-semibold" title={fmtINRFull(e.due)}>
                         {showExact ? fmtINRFull(e.due) : fmtINR(e.due)} due
                       </span>
                       {e.multiLeader && (

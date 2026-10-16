@@ -203,13 +203,13 @@ export default function StatePortfolioPage() {
       {/* Main Two-Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-6 items-start">
         {/* Left Column: State Rollup Table */}
-        <div className="bg-white backdrop-blur-xl border border-slate-200/90 rounded-2xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-3.5">
             <div className="flex items-center gap-2">
-              <div className="text-[14.5px] font-bold text-slate-900 font-display tracking-tight">
+              <div className="text-[14.5px] font-bold text-slate-900 dark:text-white font-display tracking-tight">
                 State Performance Breakdown
               </div>
-              <span className="text-[10.5px] font-mono font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">
+              <span className="text-[10.5px] font-mono font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
                 {filteredRows.length} showing
               </span>
             </div>
@@ -220,7 +220,7 @@ export default function StatePortfolioPage() {
                 type="button"
                 onClick={handleScrollToggle}
                 title={isScrolledDown ? 'Scroll to Top' : 'Scroll Down to view all states'}
-                className="text-[11px] font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/70 border border-slate-200 px-2.5 py-1 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer"
+                className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200/70 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer"
               >
                 {isScrolledDown ? (
                   <>
@@ -253,14 +253,14 @@ export default function StatePortfolioPage() {
             className="max-h-[580px] overflow-y-auto overscroll-contain overflow-x-auto pr-1.5 scroll-theme select-none"
           >
             <table className="w-full text-[12.5px] border-collapse">
-              <thead className="sticky top-0 bg-white/95 backdrop-blur-md z-10">
-                <tr className="border-b border-slate-200">
+              <thead className="sticky top-0 bg-white/95 dark:bg-[#111726]/98 backdrop-blur-md z-10">
+                <tr className="border-b border-slate-200 dark:border-slate-800">
                   {cols.map((c) => (
                     <th
                       key={c.key}
                       onClick={() => toggleSort(c.key)}
                       className={`text-left text-[10.5px] font-bold uppercase tracking-wider pb-3 px-3 cursor-pointer select-none font-display transition-colors ${
-                        sortKey === c.key ? 'text-[#ff4d30]' : 'text-slate-400 hover:text-slate-700'
+                        sortKey === c.key ? 'text-[#ff4d30]' : 'text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
                       }`}
                     >
                       <div className="flex items-center gap-1.5">
@@ -343,15 +343,15 @@ export default function StatePortfolioPage() {
         </div>
 
         {/* Right Column: Geographic Lending Heatmap (Sticky) */}
-        <div className="lg:sticky lg:top-6 self-start bg-white backdrop-blur-xl border border-slate-200/90 rounded-2xl p-6 shadow-sm space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div className="lg:sticky lg:top-6 self-start bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-4">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2">
               <MapPin size={16} className="text-[#ff4d30]" />
-              <div className="text-[15px] font-bold text-slate-900 font-display tracking-tight">
+              <div className="text-[15px] font-bold text-slate-900 dark:text-white font-display tracking-tight">
                 Geographic Lending Heatmap
               </div>
             </div>
-            <span className="text-[11px] text-slate-400">Interactive SVG</span>
+            <span className="text-[11px] text-slate-400 dark:text-slate-500">Interactive SVG</span>
           </div>
 
           {/* Heatmap Map Component */}

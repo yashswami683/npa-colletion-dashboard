@@ -177,29 +177,29 @@ export default function TeamLeadersPage({ onOpenLeader }) {
       </div>
 
       {/* Table Panel */}
-      <div className="bg-white backdrop-blur-xl border border-slate-200/90 rounded-2xl p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
         <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
           <div>
-            <div className="text-[16px] font-bold text-slate-900 font-display tracking-tight flex items-center gap-2">
+            <div className="text-[16px] font-bold text-slate-900 dark:text-white font-display tracking-tight flex items-center gap-2">
               <span>Team Leader Rollup</span>
               {isDomainActive && (
-                <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-orange-50 text-[#ff4d30] border border-orange-200">
+                <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-orange-50 dark:bg-orange-950/50 text-[#ff4d30] border border-orange-200 dark:border-orange-500/30">
                   {selectedDomains.size > 0 ? Array.from(selectedDomains).join(", ") : "All Domains"}
                 </span>
               )}
             </div>
-            <div className="text-[12px] font-medium text-slate-500 mt-0.5">Click any leader row to inspect individual agent assignments and performance</div>
+            <div className="text-[12px] font-medium text-slate-500 dark:text-slate-400 mt-0.5">Click any leader row to inspect individual agent assignments and performance</div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-display">Format:</span>
-            <div className="flex bg-slate-100 border border-slate-200 rounded-xl p-0.5 gap-0.5 shadow-inner">
+            <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider font-display">Format:</span>
+            <div className="flex bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 rounded-xl p-0.5 gap-0.5 shadow-inner">
               <button
                 type="button"
                 onClick={() => setShowExact(false)}
                 className={`text-[11.5px] font-bold px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                   !showExact
-                    ? 'bg-white text-slate-900 shadow-xs border border-slate-200/60'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs border border-slate-200/60 dark:border-slate-600'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 Compact (L/Cr)
@@ -210,7 +210,7 @@ export default function TeamLeadersPage({ onOpenLeader }) {
                 className={`text-[11.5px] font-bold px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                   showExact
                     ? 'bg-gradient-to-r from-[#ff5e3a] to-[#ff3b30] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 ₹ Exact Rupees (Sheet Match)
@@ -222,16 +222,16 @@ export default function TeamLeadersPage({ onOpenLeader }) {
         <div className="overflow-x-auto">
           <table className="w-full text-[13px]">
             <thead>
-              <tr className="border-b border-slate-200">
-                <th className="text-left text-[10.5px] font-bold uppercase tracking-wider text-slate-400 pb-3 pl-3 font-display">#</th>
+              <tr className="border-b border-slate-200 dark:border-slate-800">
+                <th className="text-left text-[10.5px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 pb-3 pl-3 font-display">#</th>
                 {cols.map((c) => (
                   <th
                     key={c.key}
                     onClick={() => toggleSort(c.key)}
                     className={`text-left text-[10.5px] font-bold uppercase tracking-wider pb-3 px-3 cursor-pointer select-none font-display transition-colors ${
                       sortKey === c.key
-                        ? (c.isLive ? 'text-emerald-700' : 'text-[#ff4d30]')
-                        : (c.isLive ? 'text-emerald-600 hover:text-emerald-700' : 'text-slate-400 hover:text-slate-700')
+                        ? (c.isLive ? 'text-emerald-700 dark:text-emerald-400' : 'text-[#ff4d30]')
+                        : (c.isLive ? 'text-emerald-600 dark:text-emerald-400 hover:text-emerald-700' : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300')
                     }`}
                   >
                     <div className="flex items-center gap-1.5">

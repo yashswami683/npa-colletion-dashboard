@@ -850,14 +850,14 @@ export default function AgentDrawer({ name, onClose }) {
           </div>
 
           {/* Trajectory Summary Card */}
-          <div className="p-4 rounded-2xl bg-gradient-to-tr from-orange-50/50 to-white border border-orange-200 shadow-sm">
-            <div className="flex items-center justify-between gap-4 flex-wrap pb-3 border-b border-orange-200/60">
+          <div className="p-4 rounded-2xl bg-gradient-to-tr from-orange-50/50 to-white dark:from-orange-950/20 dark:to-slate-900/90 border border-orange-200 dark:border-orange-900/40 shadow-sm">
+            <div className="flex items-center justify-between gap-4 flex-wrap pb-3 border-b border-orange-200/60 dark:border-orange-900/30">
               <div>
-                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-display flex items-center gap-1.5">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-display flex items-center gap-1.5">
                   <TrendingUp size={12} className="text-[#ff4d30]" />
                   <span>Total Collection · {activeMonthLabel}</span>
                 </div>
-                <div className="text-[26px] font-black font-display text-slate-900 tracking-tight mt-0.5 flex items-baseline gap-2 flex-wrap">
+                <div className="text-[26px] font-black font-display text-slate-900 dark:text-white tracking-tight mt-0.5 flex items-baseline gap-2 flex-wrap">
                   <span>
                     {fmtINRFull(trajSummary.totalRecvd)}
                   </span>
@@ -870,10 +870,10 @@ export default function AgentDrawer({ name, onClose }) {
                 <span
                   className={`text-[11px] font-bold px-3 py-1 rounded-full font-mono border ${
                     trajSummary.recoveryPct >= 80
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800'
                       : trajSummary.recoveryPct >= 65
-                      ? 'bg-amber-50 text-amber-700 border-amber-200'
-                      : 'bg-rose-50 text-rose-700 border border-rose-200'
+                      ? 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/70 dark:text-amber-300 dark:border-amber-800'
+                      : 'bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/70 dark:text-rose-300 dark:border-rose-800'
                   }`}
                 >
                   {trajSummary.recoveryPct >= 80 ? 'On track' : trajSummary.recoveryPct >= 65 ? 'Needs review' : 'Below target'}
@@ -883,26 +883,26 @@ export default function AgentDrawer({ name, onClose }) {
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 text-[11.5px]">
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">Total Due</div>
-                <div className="font-mono font-bold text-slate-700 text-[13px] mt-0.5">
+                <div className="text-slate-400 dark:text-slate-400 text-[10px] uppercase font-bold">Total Due</div>
+                <div className="font-mono font-bold text-slate-700 dark:text-slate-200 text-[13px] mt-0.5">
                   {fmtINR(trajSummary.totalDue)}
                 </div>
               </div>
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">Peak Day</div>
-                <div className="font-mono font-bold text-slate-900 text-[13px] mt-0.5">
+                <div className="text-slate-400 dark:text-slate-400 text-[10px] uppercase font-bold">Peak Day</div>
+                <div className="font-mono font-bold text-slate-900 dark:text-white text-[13px] mt-0.5">
                   {trajSummary.peakDay ? `${fmtDateShort(trajSummary.peakDay.date)} (${fmtINR(trajSummary.peakDay.recvd)})` : '—'}
                 </div>
               </div>
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">Daily Average</div>
+                <div className="text-slate-400 dark:text-slate-400 text-[10px] uppercase font-bold">Daily Average</div>
                 <div className="font-mono font-bold text-[#ff4d30] text-[13px] mt-0.5">
                   {fmtINR(trajSummary.avgDaily)}/day
                 </div>
               </div>
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">Active Days</div>
-                <div className="font-mono font-bold text-slate-700 text-[13px] mt-0.5">
+                <div className="text-slate-400 dark:text-slate-400 text-[10px] uppercase font-bold">Active Days</div>
+                <div className="font-mono font-bold text-slate-700 dark:text-slate-200 text-[13px] mt-0.5">
                   {trajSummary.activeDays} days
                 </div>
               </div>
@@ -913,7 +913,7 @@ export default function AgentDrawer({ name, onClose }) {
           <div>
             <button
               onClick={() => setShowDayLedger((v) => !v)}
-              className="w-full py-2 px-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-[11.5px] font-bold text-slate-600 hover:text-slate-900 transition-all cursor-pointer"
+              className="w-full py-2 px-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700/80 dark:border-slate-700 flex items-center justify-between text-[11.5px] font-bold text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all cursor-pointer"
             >
               <span className="flex items-center gap-2">
                 <BarChart2 size={13} className="text-[#ff4d30]" />
@@ -923,9 +923,9 @@ export default function AgentDrawer({ name, onClose }) {
             </button>
 
             {showDayLedger && (
-              <div className="mt-2.5 max-h-[260px] overflow-y-auto scroll-theme border border-slate-200 rounded-xl bg-white p-2 text-[11px] animate-fade-in-up shadow-xs">
+              <div className="mt-2.5 max-h-[260px] overflow-y-auto scroll-theme border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 p-2 text-[11px] animate-fade-in-up shadow-xs">
                 <table className="w-full text-left">
-                  <thead className="sticky top-0 bg-slate-50 text-slate-400 text-[9.5px] uppercase font-bold border-b border-slate-100">
+                  <thead className="sticky top-0 bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-300 text-[9.5px] uppercase font-bold border-b border-slate-100 dark:border-slate-700">
                     <tr>
                       <th className="pb-2 px-2">Date</th>
                       <th className="pb-2 px-2">Cases</th>
@@ -934,21 +934,21 @@ export default function AgentDrawer({ name, onClose }) {
                       <th className="pb-2 px-2">Recovery %</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {trajectoryData.map((d) => (
-                      <tr key={d.date} className={`hover:bg-slate-50 ${d.isLive ? 'bg-emerald-50/60 font-semibold' : ''}`}>
-                        <td className="py-2 px-2 font-mono text-slate-700 font-semibold flex items-center gap-1.5">
+                      <tr key={d.date} className={`hover:bg-slate-50 dark:hover:bg-slate-800/60 ${d.isLive ? 'bg-emerald-50/60 dark:bg-emerald-950/40 font-semibold' : ''}`}>
+                        <td className="py-2 px-2 font-mono text-slate-700 dark:text-slate-200 font-semibold flex items-center gap-1.5">
                           {d.isLive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />}
                           <span>{d.date}</span>
-                          {d.isLive && <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold">LIVE TODAY</span>}
+                          {d.isLive && <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-bold">LIVE TODAY</span>}
                         </td>
-                        <td className="py-2 px-2 font-mono text-slate-500">{d.cases}</td>
-                        <td className="py-2 px-2 font-mono text-slate-500">{fmtINR(d.due)}</td>
-                        <td className={`py-2 px-2 font-mono font-bold ${d.isLive ? 'text-emerald-700' : 'text-slate-900'}`}>{fmtINR(d.recvd)}</td>
+                        <td className="py-2 px-2 font-mono text-slate-500 dark:text-slate-400">{d.cases}</td>
+                        <td className="py-2 px-2 font-mono text-slate-500 dark:text-slate-400">{fmtINR(d.due)}</td>
+                        <td className={`py-2 px-2 font-mono font-bold ${d.isLive ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-900 dark:text-white'}`}>{fmtINR(d.recvd)}</td>
                         <td className="py-2 px-2">
                           <span
                             className={`font-mono font-bold ${
-                              d.pct >= 80 ? 'text-emerald-700' : d.pct >= 65 ? 'text-amber-700' : 'text-rose-700'
+                              d.pct >= 80 ? 'text-emerald-700 dark:text-emerald-400' : d.pct >= 65 ? 'text-amber-700 dark:text-amber-400' : 'text-rose-700 dark:text-rose-400'
                             }`}
                           >
                             {d.pct.toFixed(2)}%
@@ -987,10 +987,10 @@ export function Drawer({ onClose, isMaximized = false, children }) {
           animate={{ x: 0, y: 0, opacity: 1 }}
           exit={{ x: isMaximized ? 0 : 60, y: isMaximized ? 15 : 0, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 350, damping: 32 }}
-          className={`h-full bg-white overflow-y-auto scroll-theme shadow-2xl text-slate-800 transition-all duration-200 ${
+          className={`h-full bg-white dark:bg-[#0b0e17] overflow-y-auto scroll-theme shadow-2xl text-slate-800 dark:text-slate-100 transition-all duration-200 ${
             isMaximized
               ? 'w-full h-full max-w-full p-6 sm:p-8 lg:p-10 border-0'
-              : 'w-[940px] xl:w-[1100px] 2xl:w-[1260px] max-w-[96vw] border-l border-slate-200 p-6 sm:p-8 backdrop-blur-2xl'
+              : 'w-[940px] xl:w-[1100px] 2xl:w-[1260px] max-w-[96vw] border-l border-slate-200 dark:border-slate-800 p-6 sm:p-8 backdrop-blur-2xl'
           }`}
         >
           <div className={isMaximized ? 'max-w-[1720px] mx-auto w-full' : 'w-full'}>
@@ -1004,24 +1004,24 @@ export function Drawer({ onClose, isMaximized = false, children }) {
 
 export function MiniKpi({ label, value, sub, badge, accent, live }) {
   return (
-    <div className={`bg-slate-50 border rounded-xl p-3 shadow-xs transition-colors flex flex-col justify-between ${
-      live ? 'border-emerald-200 bg-emerald-50/60' : 'border-slate-200'
+    <div className={`bg-slate-50 dark:bg-slate-900/80 border rounded-xl p-3 shadow-xs transition-colors flex flex-col justify-between ${
+      live ? 'border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/60 dark:bg-emerald-950/40' : 'border-slate-200 dark:border-slate-800'
     }`}>
-      <div className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider font-display flex items-center justify-between gap-1">
+      <div className="text-[9.5px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-wider font-display flex items-center justify-between gap-1">
         <span className="flex items-center gap-1 truncate">
           {live && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />}
           <span>{label}</span>
         </span>
         {badge && (
-          <span className="text-[8px] px-1 py-0.2 rounded font-mono font-bold bg-white text-slate-600 border border-slate-200 shrink-0">
+          <span className="text-[8px] px-1 py-0.2 rounded font-mono font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shrink-0">
             {badge}
           </span>
         )}
       </div>
       <div className={`text-[15px] font-mono font-bold mt-1 ${
-        live ? 'text-emerald-700' : accent ? 'text-[#ff4d30]' : 'text-slate-900'
+        live ? 'text-emerald-700 dark:text-emerald-400' : accent ? 'text-[#ff4d30]' : 'text-slate-900 dark:text-white'
       }`}>{value}</div>
-      {sub && <div className="text-[9px] text-slate-500 mt-0.5 font-medium truncate">{sub}</div>}
+      {sub && <div className="text-[9px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium truncate">{sub}</div>}
     </div>
   );
 }

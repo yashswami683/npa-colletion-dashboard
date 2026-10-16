@@ -366,20 +366,20 @@ export default function OverviewPage({ onOpenAgent }) {
                 <button
                   key={e.name}
                   onClick={() => onOpenAgent(e.name)}
-                  className="flex items-center gap-3 text-left bg-slate-50 hover:bg-slate-100/80 border border-slate-200/90 hover:border-slate-300 rounded-xl px-3.5 py-2.5 transition-all cursor-pointer group shadow-xs"
+                  className="flex items-center gap-3 text-left bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100/80 dark:hover:bg-slate-800 border border-slate-200/90 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 rounded-xl px-3.5 py-2.5 transition-all cursor-pointer group shadow-xs"
                 >
-                  <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-500/30 flex items-center justify-center text-rose-600 dark:text-rose-400 shrink-0">
                     <AlertTriangle size={14} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="text-[13px] font-bold text-slate-900 group-hover:text-[#ff4d30] transition-colors truncate">
+                    <div className="text-[13px] font-bold text-slate-900 dark:text-white group-hover:text-[#ff4d30] transition-colors truncate">
                       {e.name}
                     </div>
-                    <div className="text-[11px] text-slate-500">
+                    <div className="text-[11px] text-slate-500 dark:text-slate-400">
                       {fmtINR(e.recvd)} of {fmtINR(e.due)}
                     </div>
                   </div>
-                  <span className="text-[12px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
+                  <span className="text-[12px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30">
                     {e.pct}%
                   </span>
                 </button>
@@ -411,18 +411,18 @@ function Stat({ label, value, accent }) {
   return (
     <div className="flex items-center gap-1.5 text-[11.5px] whitespace-nowrap">
       <span className="text-slate-400 font-normal">{label}:</span>
-      <span className={`font-mono font-semibold ${accent ? 'text-[#ff4d30]' : 'text-slate-700'}`}>{value}</span>
+      <span className={`font-mono font-semibold ${accent ? 'text-[#ff4d30]' : 'text-slate-700 dark:text-slate-200'}`}>{value}</span>
     </div>
   );
 }
 
 function Panel({ title, sub, right, className = '', children }) {
   return (
-    <div className={`bg-white hover:bg-white/95 backdrop-blur-xl border border-slate-200/90 hover:border-slate-300 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all ${className}`}>
+    <div className={`bg-white dark:bg-slate-900/90 hover:bg-white/95 dark:hover:bg-slate-900 border border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700/80 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all ${className}`}>
       <div className="flex items-center justify-between mb-5 gap-3 flex-wrap">
         <div>
-          <div className="text-[15px] font-bold text-slate-900 font-display tracking-tight">{title}</div>
-          {sub && <div className="text-[11.5px] font-medium text-slate-500 mt-0.5">{sub}</div>}
+          <div className="text-[15px] font-bold text-slate-900 dark:text-white font-display tracking-tight">{title}</div>
+          {sub && <div className="text-[11.5px] font-medium text-slate-500 dark:text-slate-400 mt-0.5">{sub}</div>}
         </div>
         {right}
       </div>
@@ -434,13 +434,13 @@ function Panel({ title, sub, right, className = '', children }) {
 function CustomTooltip({ active, payload, label, isCurrency = true }) {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-xl backdrop-blur-md text-slate-800 text-[12px]">
-        {label && <div className="font-bold text-slate-500 mb-1.5 font-display">{label}</div>}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3 shadow-xl backdrop-blur-md text-slate-800 dark:text-slate-200 text-[12px]">
+        {label && <div className="font-bold text-slate-500 dark:text-slate-400 mb-1.5 font-display">{label}</div>}
         {payload.map((item, index) => (
           <div key={index} className="flex items-center gap-2 py-0.5">
             <span className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color || item.fill || '#ff3b30' }} />
-            <span className="text-slate-500 font-medium">{item.name}:</span>
-            <span className="font-mono font-bold text-slate-900">
+            <span className="text-slate-500 dark:text-slate-400 font-medium">{item.name}:</span>
+            <span className="font-mono font-bold text-slate-900 dark:text-white">
               {isCurrency && typeof item.value === 'number' ? fmtINRFull(item.value) : item.value}
             </span>
           </div>

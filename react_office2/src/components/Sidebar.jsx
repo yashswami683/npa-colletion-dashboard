@@ -30,7 +30,7 @@ const SECTIONS = [
 export default function Sidebar({ page, setPage }) {
   const todayFormatted = fmtDateShort(META.today || TODAY_STR || new Date().toISOString().slice(0, 10));
   return (
-    <aside className="w-64 shrink-0 h-screen sticky top-0 bg-white/85 backdrop-blur-2xl border-r border-slate-200/80 flex flex-col py-5 px-3.5 select-none z-30 shadow-[1px_0_10px_rgba(0,0,0,0.02)]">
+    <aside className="w-64 shrink-0 h-screen sticky top-0 bg-white/85 dark:bg-[#0c101a]/95 backdrop-blur-2xl border-r border-slate-200/80 dark:border-slate-800/80 flex flex-col py-5 px-3.5 select-none z-30 shadow-[1px_0_10px_rgba(0,0,0,0.02)]">
       {/* Brand Header */}
       <div className="flex items-center justify-between px-2 pb-6 pt-1">
         <div className="flex items-center gap-3">
@@ -42,10 +42,10 @@ export default function Sidebar({ page, setPage }) {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-display font-extrabold text-[18px] tracking-tight text-slate-900 leading-none">NPA Recovery</span>
-              <span className="text-[9.5px] font-extrabold uppercase px-1.5 py-0.5 rounded-md bg-orange-50 text-[#ff4d30] border border-orange-200/60 tracking-wider">NPA-2</span>
+              <span className="font-display font-extrabold text-[18px] tracking-tight text-slate-900 dark:text-white leading-none">NPA Recovery</span>
+              <span className="text-[9.5px] font-extrabold uppercase px-1.5 py-0.5 rounded-md bg-orange-50 dark:bg-orange-950/50 text-[#ff4d30] border border-orange-200/60 dark:border-orange-500/30 tracking-wider">NPA-2</span>
             </div>
-            <span className="text-[11px] font-medium text-slate-500 tracking-wide mt-0.5 block">Multi-Domain Intelligence</span>
+            <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 tracking-wide mt-0.5 block">Multi-Domain Intelligence</span>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ export default function Sidebar({ page, setPage }) {
       <div className="flex-1 flex flex-col gap-5 overflow-y-auto pr-1">
         {SECTIONS.map((sec) => (
           <div key={sec.title}>
-            <div className="text-[10px] font-bold tracking-wider uppercase text-slate-400 px-3 pb-2 font-display">
+            <div className="text-[10px] font-bold tracking-wider uppercase text-slate-400 dark:text-slate-500 px-3 pb-2 font-display">
               {sec.title}
             </div>
             <div className="flex flex-col gap-1">
@@ -70,7 +70,7 @@ export default function Sidebar({ page, setPage }) {
                     {active && (
                       <motion.div
                         layoutId="sidebar-active-pill"
-                        className="absolute inset-0 bg-orange-50/90 border border-orange-200/70 shadow-xs rounded-xl -z-10"
+                        className="absolute inset-0 bg-orange-50/90 dark:bg-orange-950/40 border border-orange-200/70 dark:border-orange-500/30 shadow-xs rounded-xl -z-10"
                         transition={{ type: 'spring', stiffness: 450, damping: 35 }}
                       />
                     )}
@@ -80,10 +80,10 @@ export default function Sidebar({ page, setPage }) {
                       className={`transition-colors ${
                         active
                           ? 'text-[#ff4d30]'
-                          : 'text-slate-400 group-hover:text-slate-700'
+                          : 'text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-300'
                       }`}
                     />
-                    <span className={`transition-colors ${active ? 'text-slate-900 font-bold' : 'text-slate-600 group-hover:text-slate-900'}`}>
+                    <span className={`transition-colors ${active ? 'text-slate-900 dark:text-white font-bold' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white'}`}>
                       {item.label}
                     </span>
                     {active && (
@@ -99,24 +99,24 @@ export default function Sidebar({ page, setPage }) {
 
       {/* Bottom Vaulto-style Pro/Status Card */}
       <div className="mt-auto pt-4">
-        <div className="relative rounded-2xl p-3.5 bg-gradient-to-b from-slate-50 to-white border border-slate-200/80 shadow-xs overflow-hidden">
+        <div className="relative rounded-2xl p-3.5 bg-gradient-to-b from-slate-50 to-white dark:from-slate-800/80 dark:to-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-xs overflow-hidden">
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-xl bg-orange-50 border border-orange-200/60 flex items-center justify-center text-[#ff4d30] shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-orange-50 dark:bg-orange-950/50 border border-orange-200/60 dark:border-orange-500/30 flex items-center justify-center text-[#ff4d30] shrink-0">
               <Sparkles size={16} />
             </div>
             <div className="min-w-0 flex-1">
-              <div className="text-[12px] font-bold text-slate-900 font-display flex items-center gap-1.5">
+              <div className="text-[12px] font-bold text-slate-900 dark:text-white font-display flex items-center gap-1.5">
                 Collections Core
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               </div>
-              <div className="text-[10.5px] text-slate-500 mt-0.5 leading-snug">
-                Data as of <span className="text-slate-700 font-semibold">Today ({todayFormatted})</span>
+              <div className="text-[10.5px] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
+                Data as of <span className="text-slate-700 dark:text-slate-200 font-semibold">Today ({todayFormatted})</span>
               </div>
             </div>
           </div>
-          <div className="mt-2.5 pt-2.5 border-t border-slate-200/60 flex items-center justify-between text-[10px] text-slate-400">
+          <div className="mt-2.5 pt-2.5 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500">
             <span>Ledgered by due date</span>
-            <span className="font-mono text-slate-500 font-medium">v2.4</span>
+            <span className="font-mono text-slate-500 dark:text-slate-400 font-medium">v2.4</span>
           </div>
         </div>
       </div>

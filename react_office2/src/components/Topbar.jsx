@@ -20,12 +20,12 @@ export default function Topbar({ page }) {
   const { isDark, toggleTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-2xl border-b border-slate-200/80 px-8 py-3.5 flex items-center justify-between shadow-[0_1px_10px_rgba(0,0,0,0.02)]">
+    <header className="sticky top-0 z-20 bg-white/80 dark:bg-[#0c101a]/90 backdrop-blur-2xl border-b border-slate-200/80 dark:border-slate-800/80 px-8 py-3.5 flex items-center justify-between shadow-[0_1px_10px_rgba(0,0,0,0.02)]">
       {/* Breadcrumbs matching reference: Section / Page Title */}
       <div className="flex items-center gap-2 text-[13px]">
         <span className="text-slate-400 font-medium">{section}</span>
-        <span className="text-slate-300">/</span>
-        <span className="text-slate-900 font-bold tracking-tight font-display text-[14px]">{pageTitle}</span>
+        <span className="text-slate-300 dark:text-slate-600">/</span>
+        <span className="text-slate-900 dark:text-white font-bold tracking-tight font-display text-[14px]">{pageTitle}</span>
       </div>
 
       {/* Right User Actions */}
@@ -33,17 +33,17 @@ export default function Topbar({ page }) {
         {/* Google Sheet Live Beacon */}
         <div
           title={`Google Sheet Live Stream: ${totalLiveCases} cases collected today.`}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-left select-none shadow-xs"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-500/30 text-left select-none shadow-xs"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
-          <span className="text-[11.5px] font-mono font-bold text-emerald-800 flex items-center gap-1.5">
+          <span className="text-[11.5px] font-mono font-bold text-emerald-800 dark:text-emerald-400 flex items-center gap-1.5">
             <span className="hidden sm:inline">Google Sheet</span>
             <span>Live</span>
             {totalLiveToday > 0 && (
-              <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-100 px-1.5 py-0.2 rounded-full border border-emerald-200">
+              <span className="text-[10px] font-extrabold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/60 px-1.5 py-0.2 rounded-full border border-emerald-200 dark:border-emerald-500/40">
                 {fmtINR(totalLiveToday)}
               </span>
             )}
@@ -53,7 +53,7 @@ export default function Topbar({ page }) {
         {/* 3-Minute Auto-Sync Indicator */}
         <div 
           title="Auto-Sync Active: The entire dashboard automatically synchronizes with your Google Sheet every 3 minutes."
-          className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-[11px] font-mono select-none"
+          className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-[11px] font-mono select-none"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           <span>Auto-sync 3m</span>
@@ -64,7 +64,7 @@ export default function Topbar({ page }) {
           onClick={toggleTheme}
           title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
           aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          className="relative w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-all duration-200 cursor-pointer shadow-2xs group"
+          className="relative w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800/90 hover:bg-slate-200/80 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all duration-200 cursor-pointer shadow-2xs group"
         >
           {isDark ? (
             <Sun size={15} strokeWidth={2.4} className="text-amber-400 group-hover:rotate-45 transition-transform duration-300" />
@@ -75,14 +75,14 @@ export default function Topbar({ page }) {
 
         <button 
           title="App Switcher" 
-          className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200/70 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+          className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800/90 hover:bg-slate-200/70 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
         >
           <LayoutGrid size={15} />
         </button>
 
         <button 
           title="Notifications" 
-          className="relative w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200/70 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+          className="relative w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800/90 hover:bg-slate-200/70 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
         >
           <Bell size={15} />
           <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#ff3b30]" />
@@ -90,34 +90,33 @@ export default function Topbar({ page }) {
 
         <button 
           title="Help" 
-          className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200/70 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+          className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800/90 hover:bg-slate-200/70 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
         >
           <HelpCircle size={15} />
         </button>
 
-        <div className="h-5 w-[1px] bg-slate-200 mx-1" />
+        <div className="h-5 w-[1px] bg-slate-200 dark:bg-slate-800 mx-1" />
 
         {/* Profile Avatar / Executive Badge */}
         <div className="flex items-center gap-2.5 pl-1 select-none">
-          <div className="relative w-8 h-8 rounded-full bg-gradient-to-tr from-[#ff5e3a] to-[#ff3b30] border border-orange-200 flex items-center justify-center text-white font-bold text-[11.5px] shadow-sm overflow-hidden">
+          <div className="relative w-8 h-8 rounded-full bg-gradient-to-tr from-[#ff5e3a] to-[#ff3b30] border border-orange-200 dark:border-orange-500/40 flex items-center justify-center text-white font-bold text-[11.5px] shadow-sm overflow-hidden">
             {user?.picture ? (
               <img src={user.picture} alt={user?.name || 'User'} className="w-full h-full object-cover" />
             ) : (
               <span>{user?.avatar || 'CH'}</span>
             )}
-            <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 border-2 border-white" />
+            <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900" />
           </div>
           <div className="hidden lg:block leading-tight text-left">
-            <div className="text-[12px] font-bold text-slate-900 truncate max-w-[140px]">
+            <div className="text-[12px] font-bold text-slate-900 dark:text-white truncate max-w-[140px]">
               {user?.name || 'Central Head'}
             </div>
-            <div className="text-[10px] font-mono text-slate-400">
+            <div className="text-[10px] font-mono text-slate-400 dark:text-slate-500">
               Operations Desk
             </div>
           </div>
         </div>
       </div>
-
     </header>
   );
 }

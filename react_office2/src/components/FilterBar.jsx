@@ -82,21 +82,21 @@ export default function FilterBar({ filters, setFilters, showAgent = true, showT
   );
 
   return (
-    <div className="bg-white border border-slate-200/70 rounded-2xl px-3.5 py-2.5 mb-5 flex items-center gap-2.5 sm:gap-3 flex-wrap shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-      <span className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-        <SlidersHorizontal size={13} className="text-slate-500" />
+    <div className="bg-white dark:bg-slate-900/90 border border-slate-200/70 dark:border-slate-800 rounded-2xl px-3.5 py-2.5 mb-5 flex items-center gap-2.5 sm:gap-3 flex-wrap shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+      <span className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider">
+        <SlidersHorizontal size={13} className="text-slate-500 dark:text-slate-400" />
         <span>Filters</span>
       </span>
 
       {/* Period Segmented Control: Overall | Sep 2026 | Current Month */}
-      <div className="flex bg-slate-100/90 border border-slate-200/60 rounded-xl p-0.5 gap-0.5 text-[11.5px]">
+      <div className="flex bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200/60 dark:border-slate-700 rounded-xl p-0.5 gap-0.5 text-[11.5px]">
         <button
           type="button"
           onClick={() => selectPeriod('overall')}
           className={`flex items-center gap-1.5 font-medium px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
             activePeriod === 'overall'
-              ? 'bg-white text-slate-900 shadow-2xs font-semibold'
-              : 'text-slate-600 hover:text-slate-900'
+              ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
           <span>Overall</span>
@@ -107,14 +107,14 @@ export default function FilterBar({ filters, setFilters, showAgent = true, showT
           onClick={() => selectPeriod('sep-2026')}
           className={`flex items-center gap-1.5 font-medium px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
             activePeriod === 'sep-2026'
-              ? 'bg-white text-slate-900 shadow-2xs font-semibold'
-              : 'text-slate-600 hover:text-slate-900'
+              ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
           <span>Sep 2026</span>
           <span
             className={`text-[9.5px] font-mono px-1 py-0.2 rounded font-medium ${
-              activePeriod === 'sep-2026' ? 'bg-slate-100 text-slate-700' : 'bg-white/80 text-slate-500 border border-slate-200/60'
+              activePeriod === 'sep-2026' ? 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300' : 'bg-white/80 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700'
             }`}
           >
             Last Mo
@@ -126,14 +126,14 @@ export default function FilterBar({ filters, setFilters, showAgent = true, showT
           onClick={() => selectPeriod('current-month')}
           className={`flex items-center gap-1.5 font-medium px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
             activePeriod === 'current-month'
-              ? 'bg-white text-slate-900 shadow-2xs font-semibold'
-              : 'text-slate-600 hover:text-slate-900'
+              ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
           <span>Current Month</span>
           <span
             className={`text-[9.5px] font-mono px-1 py-0.2 rounded font-medium ${
-              activePeriod === 'current-month' ? 'bg-slate-100 text-slate-700' : 'bg-white/80 text-slate-500 border border-slate-200/60'
+              activePeriod === 'current-month' ? 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300' : 'bg-white/80 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700'
             }`}
           >
             {currentMonthName}
@@ -141,19 +141,19 @@ export default function FilterBar({ filters, setFilters, showAgent = true, showT
         </button>
       </div>
 
-      <div className="h-4 w-[1px] bg-slate-200 hidden sm:block" />
+      <div className="h-4 w-[1px] bg-slate-200 dark:bg-slate-700 hidden sm:block" />
 
       {/* Leader select (dynamically narrowed by selected domain) */}
       <select
         value={filters.leader}
         onChange={(e) => update({ leader: e.target.value, agent: '' })}
-        className="text-[12px] font-medium bg-white hover:bg-slate-50/80 border border-slate-200/80 text-slate-700 rounded-xl px-2.5 py-1.5 outline-none focus:border-slate-400 transition-all cursor-pointer"
+        className="text-[12px] font-medium bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-xl px-2.5 py-1.5 outline-none focus:border-slate-400 dark:focus:border-slate-500 transition-all cursor-pointer"
       >
-        <option value="" className="bg-white text-slate-800">
+        <option value="" className="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200">
           All leaders {isDomainActive ? `(${availableLeaders.length})` : ''}
         </option>
         {availableLeaders.map((l) => (
-          <option key={l} value={l} className="bg-white text-slate-800">
+          <option key={l} value={l} className="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200">
             {titleCase(l)}
           </option>
         ))}
@@ -164,13 +164,13 @@ export default function FilterBar({ filters, setFilters, showAgent = true, showT
         <select
           value={filters.agent}
           onChange={(e) => update({ agent: e.target.value })}
-          className="text-[12px] font-medium bg-white hover:bg-slate-50/80 border border-slate-200/80 text-slate-700 rounded-xl px-2.5 py-1.5 outline-none focus:border-slate-400 transition-all cursor-pointer max-w-[200px]"
+          className="text-[12px] font-medium bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-xl px-2.5 py-1.5 outline-none focus:border-slate-400 dark:focus:border-slate-500 transition-all cursor-pointer max-w-[200px]"
         >
-          <option value="" className="bg-white text-slate-800">
+          <option value="" className="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200">
             All employees {isDomainActive || filters.leader ? `(${availableAgents.length})` : ''}
           </option>
           {availableAgents.map((a) => (
-            <option key={a} value={a} className="bg-white text-slate-800">
+            <option key={a} value={a} className="bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200">
               {a}
             </option>
           ))}
@@ -179,15 +179,15 @@ export default function FilterBar({ filters, setFilters, showAgent = true, showT
 
       {/* Segmented Type filter */}
       {showType && (
-        <div className="flex bg-slate-100/90 border border-slate-200/60 rounded-xl p-0.5 gap-0.5 text-[11.5px]">
+        <div className="flex bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200/60 dark:border-slate-700 rounded-xl p-0.5 gap-0.5 text-[11.5px]">
           {[['', 'All'], ['NEW', 'New'], ['REPEAT', 'Repeat']].map(([val, label]) => (
             <button
               key={val}
               onClick={() => update({ type: val })}
               className={`font-medium px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                 filters.type === val
-                  ? 'bg-white text-slate-900 shadow-2xs font-semibold'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               {label}
@@ -196,26 +196,26 @@ export default function FilterBar({ filters, setFilters, showAgent = true, showT
         </div>
       )}
 
-      <div className="h-4 w-[1px] bg-slate-200 hidden sm:block" />
+      <div className="h-4 w-[1px] bg-slate-200 dark:bg-slate-700 hidden sm:block" />
 
       {/* Date range inputs (Received Date) */}
       <div className="flex items-center gap-1.5">
-        <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider hidden md:inline">RCV:</span>
+        <span className="text-[10px] font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider hidden md:inline">RCV:</span>
         <input
           type="date"
           value={filters.from}
           onChange={(e) => update({ from: e.target.value })}
-          className={`text-[11.5px] font-medium bg-white hover:bg-slate-50/80 border rounded-xl px-2.5 py-1 outline-none focus:border-slate-400 transition-all cursor-pointer ${
-            activePeriod === 'custom' ? 'border-slate-400 text-slate-900' : 'border-slate-200/80 text-slate-600'
+          className={`text-[11.5px] font-medium bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-700 border rounded-xl px-2.5 py-1 outline-none focus:border-slate-400 dark:focus:border-slate-500 transition-all cursor-pointer ${
+            activePeriod === 'custom' ? 'border-slate-400 dark:border-slate-500 text-slate-900 dark:text-white' : 'border-slate-200/80 dark:border-slate-700 text-slate-600 dark:text-slate-300'
           }`}
         />
-        <span className="text-[11px] text-slate-400 font-normal">to</span>
+        <span className="text-[11px] text-slate-400 dark:text-slate-400 font-normal">to</span>
         <input
           type="date"
           value={filters.to}
           onChange={(e) => update({ to: e.target.value })}
-          className={`text-[11.5px] font-medium bg-white hover:bg-slate-50/80 border rounded-xl px-2.5 py-1 outline-none focus:border-slate-400 transition-all cursor-pointer ${
-            activePeriod === 'custom' ? 'border-slate-400 text-slate-900' : 'border-slate-200/80 text-slate-600'
+          className={`text-[11.5px] font-medium bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-700 border rounded-xl px-2.5 py-1 outline-none focus:border-slate-400 dark:focus:border-slate-500 transition-all cursor-pointer ${
+            activePeriod === 'custom' ? 'border-slate-400 dark:border-slate-500 text-slate-900 dark:text-white' : 'border-slate-200/80 dark:border-slate-700 text-slate-600 dark:text-slate-300'
           }`}
         />
       </div>
