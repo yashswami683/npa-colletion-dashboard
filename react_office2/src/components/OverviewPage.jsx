@@ -16,7 +16,7 @@ import { useLiveCollection } from '../context/LiveCollectionContext';
 import { useDomain } from '../context/DomainContext';
 import {
   filterRows, aggregate, STATUSES, STATUS_COLORS, DOMAINS, MODES, MODE_COLORS,
-  TODAY_STR, YESTERDAY_STR, AGENTS, CASES, META,
+  TODAY_STR, YESTERDAY_STR, AGENTS, CASES, META, TARGET_MONTHLY,
   fmtINR, fmtINRFull, fmtDateShort, fmtMonth, titleCase, DOMAIN_DOT_COLORS, dateToOffset,
 } from '../utils/data';
 
@@ -148,10 +148,24 @@ export default function OverviewPage({ onOpenAgent }) {
     .slice(0, 6), [empAgg]);
 
   const needsAttention = useMemo(() => Object.entries(empAgg)
-    .map(([idx, v]) => ({ name: AGENTS[idx] || `Agent ${idx}`, ...v, domains: [...v.domains], pct: v.due ? Math.round((v.recvd / v.due) * 1000) / 10 : 0 }))
-    .filter((e) => e.pct < 60)
-    .sort((a, b) => a.pct - b.pct)
-    .slice(0, 5), [empAgg]);
+    .map(([idx, v]) => {
+      const name = AGENTS[idx] || `Agent ${idx}`;
+      const targetPct = Math.round((v.recvd / TARGET_MONTHLY) * 1000) / 10;
+      const targetRemaining = Math.max(0, TARGET_MONTHLY - v.recvd);
+      return {
+        name,
+        ...v,
+        domains: [...v.domains],
+        targetPct,
+        targetRemaining,
+      };
+    })
+    .filter((e) => e.targetPct < 50)
+    .sort((a, b) => {
+      if (a.targetPct !== b.targetPct) return a.targetPct - b.targetPct;
+      return b.due - a.due;
+    })
+    .slice(0, 6), [empAgg]);
 
   return (
     <div className="space-y-6">
@@ -357,9 +371,9 @@ export default function OverviewPage({ onOpenAgent }) {
           )}
         </Panel>
 
-        <Panel title={`Needs Attention (${selectedDomains.size > 0 ? Array.from(selectedDomains).join(", ") : "All Domains"})`} sub="Agents recovering under 60% of assigned due">
+        <Panel title={`Needs Attention (${selectedDomains.size > 0 ? Array.from(selectedDomains).join(", ") : "All Domains"})`} sub="Agents achieving under 50% of ₹2.5L monthly target">
           {needsAttention.length === 0 ? (
-            <div className="text-[12.5px] text-slate-400 py-8 text-center font-medium">All active agents in this domain are above target threshold (≥60%).</div>
+            <div className="text-[12.5px] text-slate-400 py-8 text-center font-medium">All active agents in this domain are on track (≥50% of ₹2.5L target).</div>
           ) : (
             <div className="flex flex-col gap-2.5">
               {needsAttention.map((e) => (
@@ -375,13 +389,18 @@ export default function OverviewPage({ onOpenAgent }) {
                     <div className="text-[13px] font-bold text-slate-900 dark:text-white group-hover:text-[#ff4d30] transition-colors truncate">
                       {e.name}
                     </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                      {fmtINR(e.recvd)} of {fmtINR(e.due)}
+                    <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 flex-wrap">
+                      <span className="font-semibold text-slate-700 dark:text-slate-200">{fmtINR(e.recvd)}</span>
+                      <span>of ₹2.50L target</span>
+                      <span className="text-slate-300 dark:text-slate-600">•</span>
+                      <span className="text-rose-600 dark:text-rose-400 font-mono font-medium">{fmtINR(e.targetRemaining)} left</span>
                     </div>
                   </div>
-                  <span className="text-[12px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30">
-                    {e.pct}%
-                  </span>
+                  <div className="text-right shrink-0">
+                    <span className="text-[12px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30">
+                      {e.targetPct}%
+                    </span>
+                  </div>
                 </button>
               ))}
             </div>

@@ -22,6 +22,8 @@ export const MODE_COLORS = {
   OTHER: '#94a3b8',
 };
 
+export const TARGET_MONTHLY = 250000; // Fixed ₹2.50 Lakhs Monthly Benchmark per Collection Agent
+
 export let AGENTS = META.agents;
 export let LEADERS = META.leaders;
 export let STATUSES = META.statuses;
